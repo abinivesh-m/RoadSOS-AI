@@ -1,8 +1,9 @@
 # RoadSOS AI
+
 An AI-based driver monitoring and emergency-response prototype that combines phone-usage detection, drowsiness detection, and a simulated accident/SOS pipeline in one real-time dashboard.
 
-**Status:**
-Software-only prototype, runs on a laptop with a USB webcam. Accident detection and vehicle speed are currently **simulated**, not sensor-driven — see [Current Limitations](#current-limitations) below.
+**Status:** Software-only prototype, runs on a laptop with a USB webcam. Accident detection and vehicle speed are currently **simulated**, not sensor-driven — see [Current Limitations](#current-limitations) below.
+
 ---
 
 ## What it does
@@ -37,6 +38,33 @@ Emergency Notification (cancel window available before SOS is sent)
 ```
 
 ---
+
+## Project structure
+
+```
+RoadSOS-AI/
+├── main.py                   # Entry point — runs the camera loop and ties everything together
+├── camera.py                 # Webcam capture handling
+├── drowsiness_mediapipe.py   # EAR-based drowsiness detection (MediaPipe)
+├── drowsiness.py             # Haar-cascade fallback drowsiness detection (OpenCV)
+├── phone_detection.py        # YOLOv8 phone-usage detection
+├── risk_engine.py            # Combines detections into a real-time risk score
+├── accident_detector.py      # Accident trigger + countdown logic (simulated)
+├── sos_manager.py            # SOS status + emergency message generation
+├── gps_manager.py            # GPS location + Google Maps link
+├── audio_manager.py          # Async voice alerts (pyttsx3)
+├── dashboard.py              # OpenCV dashboard overlay (speed, risk score, EAR, etc.)
+├── alerts_ui.py              # Alert message + color logic
+├── emergency_ui.py           # SOS countdown / SOS-sent overlay
+├── analytics_manager.py      # Event analytics tracking
+├── status_manager.py         # Overall system status tracking
+├── logger.py                 # Event logging
+├── __init__.py
+└── requirements.txt
+```
+
+---
+
 ## Tech stack
 
 - **OpenCV** — video capture, frame processing, dashboard UI
